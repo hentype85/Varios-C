@@ -36,7 +36,7 @@ int main()
         {
             if (vector[j] > vector[j + 1])
             {
-                aux = vector[j+1];
+                aux = vector[j + 1];
                 vector[j + 1] = vector[j];
                 vector[j] = aux;
             }
