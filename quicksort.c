@@ -19,7 +19,7 @@ void print_array(const int *array, size_t size)
 int partition(int *array, int izq,  int der, size_t size)
 {
     int i = izq;
-    int j = izq - 1; 
+    int j = i - 1; 
     int aux = 0;
 
     int pivot  = array[der];
