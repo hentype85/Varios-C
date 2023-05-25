@@ -16,20 +16,18 @@ void print_array(const int *array, size_t size)
     printf("\n");
 }
 
-int partition(int *array, int izq,  int der, size_t size)
+int partition(int *array, int inicio,  int fin, size_t size)
 {
-    int i = izq;
+    int i = inicio;
     int j = i - 1; 
     int aux = 0;
+    int pivot = array[fin];
 
-    int pivot  = array[der];
-
-    for (i ; i < der ; i++)
+    while (i < fin)
     {
         if (array[i] < pivot)
         {
             j++;
-
             if (array[j] != array[i])
             {
                 aux = array[j];
@@ -39,15 +37,15 @@ int partition(int *array, int izq,  int der, size_t size)
                 print_array(array, size);
             }
         }
+        i++;
     }
 
     j++;
-
-    if (array[j] != array[der])
+    if (array[j] != array[fin])
     {
         aux = array[j];
-        array[j] = array[der];
-        array[der] = aux;
+        array[j] = array[fin];
+        array[fin] = aux;
 
         print_array(array, size);
     }
@@ -55,16 +53,18 @@ int partition(int *array, int izq,  int der, size_t size)
     return (j);
 }
 
-void quick_s(int *array, int izq, int der, size_t size)
+void quick_s(int *array, int inicio, int fin, size_t size)
 {
     int pivot;
 
-    if (izq < der)
+    if (inicio < fin)
     {
-        pivot = partition(array, izq, der, size);
+        pivot = partition(array, inicio, fin, size);
 
-        quick_s(array, izq, pivot - 1, size); /*indice derecha del final hasta principio*/
-        quick_s(array, pivot + 1, der, size); /*indice izquierda del principio al final*/
+        /*llamada recursiva a quick_s para ordenar la parte izquierda del pivote*/
+        quick_s(array, inicio, pivot - 1, size);
+        /*llamada recursiva a quick_s para ordenar la parte derecha del pivote*/
+        quick_s(array, pivot + 1, fin, size);
     }
 }
 
